@@ -1,5 +1,6 @@
 var expect = require('expect');
-const {isRealString} = require('./validation');
+const {isRealString, isNameTaken} = require('./validation');
+const {Users} = require('./users');
 
 describe('isRealString', () => {
   it('should reject non-string values', () => {
@@ -16,4 +17,35 @@ describe('isRealString', () => {
     var res = isRealString('  bar  ');
     expect(res).toBe(true);
   });
+});
+
+describe('isTakenName', () => {
+  var users;
+  beforeEach(() => {
+    users = new Users();
+    users.users = [{
+      id: '1',
+      name: 'Mike',
+      room: 'Node Course'
+    }, {
+      id: '2',
+      name: 'Jen',
+      room: 'React Course'
+    }, {
+      id: '3',
+      name: 'Bar',
+      room: 'Node Course'
+    }];
+  });
+
+    it('shuold reject taken name', () => {
+      var user = {
+        name: 'Bar',
+        id: '123',
+        room: 'Node Course'
+      };
+
+      var res = isNameTaken(users, user.name);
+      expect(res).toBe(true);
+    });
 });

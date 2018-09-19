@@ -4,7 +4,7 @@ function scrollToBottom () {
   //Selectors
   var messages = jQuery('#messages');
   var newMessage = messages.children('li:last-child');
-  // Heights
+  //Heights
   var clientHeight = messages.prop('clientHeight');
   var scrollTop = messages.prop('scrollTop');
   var scrollHeight = messages.prop('scrollHeight');
@@ -67,14 +67,6 @@ socket.on('newLocationMessage', function (message) {
 
   jQuery('#messages').append(html);
   scrollToBottom();
-
-  // var li = jQuery('<li></li>');
-  // var a = jQuery('<a target="_blank">My curren location</a>');
-  //
-  // li.text(`${message.from} ${formattedTime}: `);
-  // a.attr('href', message.url);
-  // li.append(a);
-  // jQuery('#messages').append(li);
 });
 
 jQuery('#message-form').on('submit', function (e) {
